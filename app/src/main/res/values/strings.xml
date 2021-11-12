@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Book Flight</string>
+    <string name="rb1">Ida y Vuelta</string>
+    <string name="rb2">Ida</string>
+    <string name="btn1">Historial</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="date">Date</string>
+    <string name="salida">Salida</string>
+    <string name="vuelta">Vuelta</string>
+    <string name="et5">0</string>
+    <string name="tv1">Número máximo de trasbordos:</string>
+    <string name="rb3">Ninguna</string>
+    <string name="rb4">Una</string>
+    <string name="rb5">2 o más</string>
+    <string name="btn2">Buscar Vuelos</string>
+</resources>
