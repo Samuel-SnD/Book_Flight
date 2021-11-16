@@ -2,6 +2,7 @@ package com.example.ejercicio213;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         sf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent it = new Intent(MainActivity.this, Vuelos.class);
+
+                // Obtengo el tipo de vuelo
                 RadioGroup radioGroup = findViewById(R.id.rg1);
                 int radioButtonID = radioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonID);
@@ -56,16 +60,28 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                     selectedText = "Ida";
+
+                //Obtengo la ciudad de salida
                 EditText et1 = findViewById(R.id.et1);
                 String from = et1.getText().toString();
+
+                //Obtengo la ciudad de destino
                 EditText et2 = findViewById(R.id.et2);
                 String to = et2.getText().toString();
+
+                //Obtengo la fecha de salida
                 EditText et3 = findViewById(R.id.et3);
                 String depart = et3.getText().toString();
+
+                //Obtengo la fecha de llegada
                 EditText et4 = findViewById(R.id.et4);
                 String arrive = et4.getText().toString();
+
+                //Obtengo el número de pasageros
                 EditText pas = findViewById(R.id.et5);
                 int passengers = Integer.parseInt(pas.getText().toString());
+
+                //Obtengo el número de paradas
                 RadioGroup radioGroup2 = findViewById(R.id.rg2);
                 int radioButtonID2 = radioGroup2.getCheckedRadioButtonId();
                 RadioButton radioButton2 = (RadioButton) radioGroup2.findViewById(radioButtonID);
@@ -79,20 +95,26 @@ public class MainActivity extends AppCompatActivity {
                     selectedText2 = "One stop";
                 else
                     selectedText2 = "2 or more";
+
+                //Dependiendo del tipo del vuelo creo y añado el objeto al arraylist con uno u otro constructor
                 RadioButton rb = findViewById(R.id.rb2);
                 TextView fin = findViewById(R.id.tvfin);
                 if (radioButtonID == rb.getId()) {
                     InformacionVuelo vuelo = new InformacionVuelo(selectedText, from, to, depart, selectedText2 ,passengers);
                     info.add(vuelo);
-                    fin.setText("Tipo de vuelo: " + selectedText + "\n From: " + from + "\n To:" + to + "\n Depart: " + depart + "\n Paradas: " + selectedText2 + "\n Número de pasageros: " + passengers);
+                    it.putExtra("Vuelo", vuelo);
                 }
                 else {
                     InformacionVuelo vuelocompleto = new InformacionVuelo(selectedText, from, to, depart, arrive, selectedText2, passengers);
                     info.add(vuelocompleto);
-                    fin.setText("Tipo de vuelo: " + selectedText + "\n From: " + from + "\n To:" + to + "\n Depart: " + depart + "\n Paradas: " + selectedText2 + "\n Return: " + arrive +"\n Número de pasageros: " + passengers);
+                    it.putExtra("VueloCompleto", vuelocompleto);
                 }
+
+                //Inicio la actividad con el intent que he creado
+                startActivity(it);
             }
         });
+
         Button hs = findViewById (R.id.btn1);
         hs.setOnClickListener(new View.OnClickListener() {
             @Override

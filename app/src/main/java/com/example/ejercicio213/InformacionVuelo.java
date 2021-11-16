@@ -1,6 +1,8 @@
 package com.example.ejercicio213;
 
-public class InformacionVuelo {
+import java.io.Serializable;
+
+public class InformacionVuelo implements Serializable {
     String tipo, numparadas, from, to, depart, arrive;
     int passengers;
 

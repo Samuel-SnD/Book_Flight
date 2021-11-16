@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <Vuelo>
+        <Tipo>Ida y Vuelta</Tipo>
+        <From>A Coruña</From>
+        <To>Santiago de Compostela</To>
+        <Trasbordos>Ninguno</Trasbordos>
+        <Precio>150€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>A Coruña</From>
+        <To>Santiago de Compostela</To>
+        <Trasbordos>Ninguno</Trasbordos>
+        <Precio>80€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>Santiago de Compostela</From>
+        <To>A Coruña</To>
+        <Trasbordos>Ninguno</Trasbordos>
+        <Precio>80€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida y Vuelta</Tipo>
+        <From>A Coruña</From>
+        <To>Murcia</To>
+        <Trasbordos>Uno</Trasbordos>
+        <Precio>500€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>A Coruña</From>
+        <To>Murica</To>
+        <Trasbordos>Uno</Trasbordos>
+        <Precio>300€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>Murcia</From>
+        <To>A Coruña</To>
+        <Trasbordos>Uno</Trasbordos>
+        <Precio>300€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida y Vuelta</Tipo>
+        <From>A Coruña</From>
+        <To>New York</To>
+        <Trasbordos>Dos o más</Trasbordos>
+        <Precio>2000€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>A Coruña</From>
+        <To>New York</To>
+        <Trasbordos>Dos o más</Trasbordos>
+        <Precio>1200€</Precio>
+    </Vuelo>
+    <Vuelo>
+        <Tipo>Ida</Tipo>
+        <From>New York</From>
+        <To>A Coruña</To>
+        <Trasbordos>Dos o más</Trasbordos>
+        <Precio>1200€</Precio>
+    </Vuelo>
+</resources>
