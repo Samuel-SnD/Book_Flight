@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Vuelos extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +19,7 @@ public class Vuelos extends AppCompatActivity {
 
         InformacionVuelo vuelo = (InformacionVuelo) getIntent().getSerializableExtra("vuelo");
         InformacionVuelo vueloCompleto = (InformacionVuelo) getIntent().getSerializableExtra("vueloCompleto");
+
 
         if (vuelo != null) {
             String tipo = vuelo.getTipo();
