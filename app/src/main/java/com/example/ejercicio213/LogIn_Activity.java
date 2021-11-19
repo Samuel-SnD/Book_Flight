@@ -89,6 +89,17 @@ public class LogIn_Activity extends AppCompatActivity {
         }
     }
 
+
+    private void sendEmailVerification() {
+        final FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                });
+    }
+
     private void reload() { }
 
     private void updateUI(FirebaseUser user) {
