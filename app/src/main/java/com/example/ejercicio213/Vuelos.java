@@ -21,8 +21,7 @@ import java.util.List;
 public class Vuelos extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    InformacionVuelo vueloFinal = new InformacionVuelo();
-    ArrayList<InformacionVuelo> vuelos;
+    ArrayList <InformacionVuelo> vuelos = new ArrayList <> ();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +34,12 @@ public class Vuelos extends AppCompatActivity {
 
         if (vuelo.getTipo().equalsIgnoreCase("Ida y Vuelta")) {
             db.collection("vuelos")
-                    .whereEqualTo("Tipo", vueloFinal.getTipo())
-                    .whereEqualTo("From", vueloFinal.getFrom())
-                    .whereEqualTo("To", vueloFinal.getTo())
-                    .whereEqualTo("Trasbordos", vueloFinal.getNumparadas())
-                    .whereEqualTo("Depart", vueloFinal.getDepart())
-                    .whereEqualTo("Arrive", vueloFinal.getArrive())
+                    .whereEqualTo("Tipo", vuelo.getTipo())
+                    .whereEqualTo("From", vuelo.getFrom())
+                    .whereEqualTo("To", vuelo.getTo())
+                    .whereEqualTo("Trasbordos", vuelo.getNumparadas())
+                    .whereEqualTo("Depart", vuelo.getDepart())
+                    .whereEqualTo("Arrive", vuelo.getArrive())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -68,11 +67,11 @@ public class Vuelos extends AppCompatActivity {
                     });
         } else {
             db.collection("vuelos")
-                    .whereEqualTo("Tipo", vueloFinal.getTipo())
-                    .whereEqualTo("From", vueloFinal.getFrom())
-                    .whereEqualTo("To", vueloFinal.getTo())
-                    .whereEqualTo("Trasbordos", vueloFinal.getNumparadas())
-                    .whereEqualTo("Depart", vueloFinal.getDepart())
+                    .whereEqualTo("Tipo", vuelo.getTipo())
+                    .whereEqualTo("From", vuelo.getFrom())
+                    .whereEqualTo("To", vuelo.getTo())
+                    .whereEqualTo("Trasbordos", vuelo.getNumparadas())
+                    .whereEqualTo("Depart", vuelo.getDepart())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

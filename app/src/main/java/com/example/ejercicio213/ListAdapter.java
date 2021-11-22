@@ -58,7 +58,6 @@ public class ListAdapter extends BaseAdapter {
             viewHolder.txtFecha.setText(vuelos.get(position).getDepart());
         }
 
-        viewHolder.icon.setImageResource(R.drawable.plane);
         viewHolder.txtTipo.setText(vuelos.get(position).getTipo());
         viewHolder.txtFrom.setText(vuelos.get(position).getFrom());
         viewHolder.txtTo.setText(vuelos.get(position).getTo());
