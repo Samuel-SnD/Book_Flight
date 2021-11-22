@@ -11,7 +11,7 @@
         android:src="@drawable/plane" />
 
     <TextView
-        android:id="@+id/aNametxt"
+        android:id="@+id/tvtipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,4 +20,59 @@
         android:layout_toEndOf="@+id/appIconIV"
         android:maxLines="1"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvfrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/appIconIV"
+        android:layout_below="@id/tvtipo"
+        android:maxLines="1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/appIconIV"
+        android:layout_below="@id/tvfrom"
+        android:maxLines="1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvfecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/appIconIV"
+        android:layout_below="@id/tvto"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvparadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/appIconIV"
+        android:layout_below="@id/tvfecha"
+        android:maxLines="1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvprecio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/appIconIV"
+        android:layout_below="@id/tvparadas"
+        android:maxLines="1"
+        android:textSize="20sp" />
+
 </RelativeLayout>

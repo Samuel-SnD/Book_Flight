@@ -21,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         info = new ArrayList <InformacionVuelo>();
         EditText pas = findViewById(R.id.et5);
         ImageButton iv1 = findViewById(R.id.ib1);
+
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         ImageButton iv2 = findViewById(R.id.ib2);
         iv2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         Button sf = findViewById(R.id.btn2);
         sf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 RadioButton rb5 = findViewById(R.id.rb4);
                 String selectedText2;
                 if (radioButtonID2 == rb4.getId()) {
-                    selectedText2 = "NonStop";
+                    selectedText2 = "Ninguno";
                 }
                 else if (radioButtonID2 == rb5.getId())
-                    selectedText2 = "One stop";
+                    selectedText2 = "Uno";
                 else
-                    selectedText2 = "2 or more";
+                    selectedText2 = "Dos o mas";
 
                 //Dependiendo del tipo del vuelo creo y añado el objeto al arraylist con uno u otro constructor
                 RadioButton rb = findViewById(R.id.rb2);
@@ -107,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     InformacionVuelo vuelocompleto = new InformacionVuelo(selectedText, from, to, depart, arrive, selectedText2, passengers);
                     info.add(vuelocompleto);
-                    it.putExtra("VueloCompleto", vuelocompleto);
+                    it.putExtra("Vuelo", vuelocompleto);
                 }
 
                 //Inicio la actividad con el intent que he creado

@@ -8,24 +8,24 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ListAdapter extends BaseAdapter {
     Context context;
-    private final String [] values;
-    private final String [] numbers;
-    private final int [] images;
-    public ListAdapter(Context context, String [] values, String [] numbers, int [] images){
+    private ArrayList <InformacionVuelo> vuelos;
+
+    public ListAdapter(Context context, ArrayList<InformacionVuelo> arrvuelos){
         this.context = context;
-        this.values = values;
-        this.numbers = numbers;
-        this.images = images;
+        this.vuelos = arrvuelos;
     }
+
     @Override
     public int getCount() {
-        return values.length;
+        return vuelos.size();
     }
     @Override
     public Object getItem(int i) {
-        return i;
+        return vuelos.get(i);
     }
     @Override
     public long getItemId(int i) {
@@ -40,20 +40,41 @@ public class ListAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.row, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.aNametxt);
             viewHolder.icon = (ImageView) convertView.findViewById(R.id.appIconIV);
+            viewHolder.txtTipo = (TextView) convertView.findViewById(R.id.tvtipo);
+            viewHolder.txtFrom = (TextView) convertView.findViewById(R.id.tvfrom);
+            viewHolder.txtTo = (TextView) convertView.findViewById(R.id.tvto);
+            viewHolder.txtFecha = (TextView) convertView.findViewById(R.id.tvfecha);
+            viewHolder.txtParadas = (TextView) convertView.findViewById(R.id.tvparadas);
+            viewHolder.txtPrecio = (TextView) convertView.findViewById(R.id.tvprecio);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.txtName.setText(values[position]);
-        viewHolder.txtVersion.setText(numbers[position]);
-        viewHolder.icon.setImageResource(images[position]);
+
+        if (vuelos.get(position).tipo.equalsIgnoreCase("Ida y Vuelta")) {
+            viewHolder.txtFecha.setText(vuelos.get(position).getDepart().concat(" / ").concat(vuelos.get(position).getArrive()));
+        } else {
+            viewHolder.txtFecha.setText(vuelos.get(position).getDepart());
+        }
+
+        viewHolder.icon.setImageResource(R.drawable.plane);
+        viewHolder.txtTipo.setText(vuelos.get(position).getTipo());
+        viewHolder.txtFrom.setText(vuelos.get(position).getFrom());
+        viewHolder.txtTo.setText(vuelos.get(position).getTo());
+        viewHolder.txtParadas.setText(vuelos.get(position).getNumparadas());
+        viewHolder.txtPrecio.setText(vuelos.get(position).getPrecio());
+
+
         return convertView;
     }
     private static class ViewHolder {
-        TextView txtName;
-        TextView txtVersion;
         ImageView icon;
+        TextView txtTipo;
+        TextView txtFrom;
+        TextView txtTo;
+        TextView txtFecha;
+        TextView txtParadas;
+        TextView txtPrecio;
     }
 }

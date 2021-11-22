@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class InformacionVuelo implements Serializable {
     String tipo, numparadas, from, to, depart, arrive;
     int passengers;
-    float precio;
+    String precio;
 
     public InformacionVuelo (String ti, String f, String t, String d, String a, String num, int p) {
         this.tipo = ti;
@@ -83,9 +83,9 @@ public class InformacionVuelo implements Serializable {
         this.passengers = passengers;
     }
 
-    public float getPrecio () {return precio;}
+    public String getPrecio () {return precio;}
 
-    public void setPrecio (float precio) {this.precio = precio;}
+    public void setPrecio (String precio) {this.precio = precio;}
 
 
     @Override
