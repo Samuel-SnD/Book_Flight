@@ -1,9 +1,11 @@
 package com.example.ejercicio213;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,16 +15,31 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<InformacionVuelo> info;
+
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        info = new ArrayList <InformacionVuelo>();
         EditText pas = findViewById(R.id.et5);
         ImageButton iv1 = findViewById(R.id.ib1);
 
@@ -105,13 +122,43 @@ public class MainActivity extends AppCompatActivity {
                 TextView fin = findViewById(R.id.tvfin);
                 if (radioButtonID == rb.getId()) {
                     InformacionVuelo vuelo = new InformacionVuelo(selectedText, from, to, depart, selectedText2 ,passengers);
-                    info.add(vuelo);
                     it.putExtra("Vuelo", vuelo);
+                    Map <String, Object> vue = new HashMap <> ();
+                    vue.put(Calendar.getInstance().getTime().toString(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), vuelo.getPassengers(), vuelo.getDepart()));
+                    db.collection("historial").document(user.getEmail())
+                            .set(vue, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("TAG", "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("TAG", "Error writing document", e);
+                                }
+                            });
                 }
                 else {
-                    InformacionVuelo vuelocompleto = new InformacionVuelo(selectedText, from, to, depart, arrive, selectedText2, passengers);
-                    info.add(vuelocompleto);
-                    it.putExtra("Vuelo", vuelocompleto);
+                    InformacionVuelo vuelo = new InformacionVuelo(selectedText, from, to, depart, arrive, selectedText2, passengers);
+                    it.putExtra("Vuelo", vuelo);
+                    Map <String, Object> vue = new HashMap <> ();
+                    vue.put(Calendar.getInstance().getTime().toString(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), vuelo.getPassengers(), vuelo.getDepart(), vuelo.getArrive()));
+                    db.collection("historial").document(user.getEmail())
+                            .set(vue, SetOptions.merge())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("TAG", "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("TAG", "Error writing document", e);
+                                }
+                            });
                 }
 
                 //Inicio la actividad con el intent que he creado
@@ -123,11 +170,8 @@ public class MainActivity extends AppCompatActivity {
         hs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView fin = findViewById(R.id.tvfin);
-                fin.setText("");
-                for (int i = 0; i < info.size(); i++) {
-                    fin.append(info.get(i).toString() + "\n");
-                }
+                Intent it = new Intent(MainActivity.this, Historial.class);
+                startActivity(it);
             }
         });
     }

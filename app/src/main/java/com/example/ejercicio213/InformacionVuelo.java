@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class InformacionVuelo implements Serializable {
     String tipo, numparadas, from, to, depart, arrive;
-    int passengers;
+    long passengers;
     String precio;
 
-    public InformacionVuelo (String ti, String f, String t, String d, String a, String num, int p) {
+    public InformacionVuelo (String ti, String f, String t, String d, String a, String num, long p) {
         this.tipo = ti;
         this.from = f;
         this.to = t;
@@ -16,7 +16,7 @@ public class InformacionVuelo implements Serializable {
         this.numparadas = num;
         this.passengers = p;
     }
-    public InformacionVuelo (String ti, String f, String t, String d, String num, int p) {
+    public InformacionVuelo (String ti, String f, String t, String d, String num, long p) {
         this.tipo = ti;
         this.from = f;
         this.to = t;
@@ -75,11 +75,11 @@ public class InformacionVuelo implements Serializable {
         this.arrive = arrive;
     }
 
-    public int getPassengers() {
+    public long getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(int passengers) {
+    public void setPassengers(long passengers) {
         this.passengers = passengers;
     }
 

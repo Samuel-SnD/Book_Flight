@@ -29,8 +29,6 @@ public class Vuelos extends AppCompatActivity {
         setContentView(R.layout.activity_vuelos);
 
         InformacionVuelo vuelo = (InformacionVuelo) getIntent().getSerializableExtra("Vuelo");
-        Log.i("Vuelo", vuelo.toString());
-
 
         if (vuelo.getTipo().equalsIgnoreCase("Ida y Vuelta")) {
             db.collection("vuelos")
