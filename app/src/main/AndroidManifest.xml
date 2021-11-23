@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ejercicio213">
         <activity
+            android:name=".Reservas"
+            android:exported="true" />
+        <activity
             android:name=".Historial"
             android:exported="true" />
         <activity

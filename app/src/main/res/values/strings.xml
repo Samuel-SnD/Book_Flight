@@ -19,4 +19,7 @@
     <string name="log_in">Log In</string>
     <string name="register">Register</string>
     <string name="username">Username</string>
+    <string name="reservas">Ver Reservas</string>
+    <string name="title">Confirmación</string>
+    <string name="dialog1">¿Estás seguro de que quieres reservar el vuelo?</string>
 </resources>

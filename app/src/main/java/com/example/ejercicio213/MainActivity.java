@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //Dependiendo del tipo del vuelo creo y añado el objeto al arraylist con uno u otro constructor
                 RadioButton rb = findViewById(R.id.rb2);
-                TextView fin = findViewById(R.id.tvfin);
                 if (radioButtonID == rb.getId()) {
                     InformacionVuelo vuelo = new InformacionVuelo(selectedText, from, to, depart, selectedText2 ,passengers);
                     it.putExtra("Vuelo", vuelo);
@@ -162,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //Inicio la actividad con el intent que he creado
+                it.putExtra("Passengers", passengers);
                 startActivity(it);
             }
         });
@@ -171,6 +171,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, Historial.class);
+                startActivity(it);
+            }
+        });
+
+        Button rs = findViewById(R.id.btn3);
+        rs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, Reservas.class);
                 startActivity(it);
             }
         });
