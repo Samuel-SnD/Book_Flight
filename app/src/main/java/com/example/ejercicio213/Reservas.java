@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,9 +32,9 @@ import java.util.Map;
 public class Reservas extends AppCompatActivity {
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    ;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
+    DocumentReference docReservas = db.collection("reservas").document(user.getEmail());
     ArrayList<InformacionVuelo> vuelos = new ArrayList<>();
 
     @Override
@@ -150,6 +151,12 @@ public class Reservas extends AppCompatActivity {
                 }
                 calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getTimeInMillis());
                 startActivity(calIntent);
+                return true;
+            case R.id.Cmenu4:
+
+                return true;
+            case R.id.Cmenu5:
+
                 return true;
             default:
                 return super.onContextItemSelected(item);
