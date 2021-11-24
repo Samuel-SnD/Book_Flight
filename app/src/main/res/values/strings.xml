@@ -22,4 +22,9 @@
     <string name="reservas">Ver Reservas</string>
     <string name="title">Confirmación</string>
     <string name="dialog1">¿Estás seguro de que quieres reservar el vuelo?</string>
+    <string name="cmenu1">Geoposición ciudad salida</string>
+    <string name="cmenu2">Geoposición ciudad llegada</string>
+    <string name="cmenu3">Recordatorio</string>
+    <string name="cmenu4">Modificar Reserva</string>
+    <string name="cmenu5">Eliminar Reserva</string>
 </resources>
