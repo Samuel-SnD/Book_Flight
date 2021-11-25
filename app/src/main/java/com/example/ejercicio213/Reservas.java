@@ -20,12 +20,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class Reservas extends AppCompatActivity {
                                         vuelo.setNumparadas((String) lista.get(3));
                                         vuelo.setPassengers((Long) lista.get(4));
                                         vuelo.setDepart((String) lista.get(5));
+                                        vuelo.setIdreserva(key);
                                         if (lista.size() == 7)
                                             vuelo.setArrive((String) lista.get(6));
                                         vuelos.add(vuelo);
@@ -156,7 +159,23 @@ public class Reservas extends AppCompatActivity {
 
                 return true;
             case R.id.Cmenu5:
-
+                Map <String, Object> map = new HashMap <> ();
+                map.put(vuelos.get(info.position).getIdreserva(), FieldValue.delete());
+                docReservas.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Se ha eliminado la reserva correctamente", Toast.LENGTH_LONG).show();
+                            vuelos.remove(vuelos.get(info.position));
+                            ListView lvreservas = (ListView) findViewById(R.id.lvreservas);
+                            ListAdapter2 lAdapter = new ListAdapter2(getApplicationContext(), vuelos);
+                            lvreservas.setAdapter(lAdapter);
+                            registerForContextMenu(lvreservas);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No se ha podido eliminar la reserva", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
                 return true;
             default:
                 return super.onContextItemSelected(item);

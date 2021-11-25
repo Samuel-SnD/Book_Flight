@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class InformacionVuelo implements Serializable {
     String tipo, numparadas, from, to, depart, arrive;
     long passengers;
-    String precio;
+    String precio, idreserva;
 
     public InformacionVuelo (String ti, String f, String t, String d, String a, String num, long p) {
         this.tipo = ti;
@@ -87,6 +87,13 @@ public class InformacionVuelo implements Serializable {
 
     public void setPrecio (String precio) {this.precio = precio;}
 
+    public String getIdreserva() {
+        return idreserva;
+    }
+
+    public void setIdreserva(String idreserva) {
+        this.idreserva = idreserva;
+    }
 
     @Override
     public String toString() {
