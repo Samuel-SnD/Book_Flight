@@ -1,6 +1,7 @@
 package com.example.ejercicio213;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -156,7 +158,28 @@ public class Reservas extends AppCompatActivity {
                 startActivity(calIntent);
                 return true;
             case R.id.Cmenu4:
-
+                InformacionVuelo vuelo = vuelos.get(info.position);
+                vuelo.setPassengers(vuelo.getPassengers() + 1);
+                Map <String, Object> mapa = new HashMap <> ();
+                if (vuelos.get(info.position).getArrive() != null) {
+                    mapa.put(vuelos.get(info.position).getIdreserva(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), vuelo.getPassengers(), vuelo.getDepart(), vuelo.getArrive()));
+                } else {
+                    mapa.put(vuelos.get(info.position).getIdreserva(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), vuelo.getPassengers(), vuelo.getDepart()));
+                }
+                docReservas.update(mapa).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Se ha añadido un pasajero más al vuelo", Toast.LENGTH_SHORT).show();
+                            ListView lvreservas = (ListView) findViewById(R.id.lvreservas);
+                            ListAdapter2 lAdapter = new ListAdapter2(getApplicationContext(), vuelos);
+                            lvreservas.setAdapter(lAdapter);
+                            registerForContextMenu(lvreservas);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No se ha podido añadir un vuelo", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 return true;
             case R.id.Cmenu5:
                 Map <String, Object> map = new HashMap <> ();
