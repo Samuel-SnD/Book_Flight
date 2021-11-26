@@ -30,7 +30,6 @@ import java.util.Map;
 public class Vuelos extends AppCompatActivity {
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    ;
     public int passengers;
     FirebaseUser user = mAuth.getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,7 +43,10 @@ public class Vuelos extends AppCompatActivity {
         InformacionVuelo vuelo = (InformacionVuelo) getIntent().getSerializableExtra("Vuelo");
         passengers = getIntent().getIntExtra("Passengers", 0);
 
+        // Compruebo si el vuelo es de Ida y Vuelta o solamente de Ida
         if (vuelo.getTipo().equalsIgnoreCase("Ida y Vuelta")) {
+            // Recogo todos los vuelos de la base de datos que coincidan con los datos
+            // que ha proporcionado el usuario.
             db.collection("vuelos")
                     .whereEqualTo("Tipo", vuelo.getTipo())
                     .whereEqualTo("From", vuelo.getFrom())
@@ -56,6 +58,9 @@ public class Vuelos extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            // Si se realiza correctamente voy vuelo a vuelo generándolos para
+                            // añadirlos a un ArrayList y más adelante poder generar la vista
+                            // con estos vuelos.
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     InformacionVuelo vuelo = new InformacionVuelo();
@@ -70,6 +75,8 @@ public class Vuelos extends AppCompatActivity {
                                     ListView lvVuelos = (ListView) findViewById(R.id.lvvuelos);
                                     ListAdapter lAdapter = new ListAdapter(getApplicationContext(), vuelos);
                                     lvVuelos.setAdapter(lAdapter);
+                                    // Genero un diálogo para preguntar al usuario si quiere reservar
+                                    // el vuelo que ha seleccionado.
                                     lvVuelos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -130,7 +137,10 @@ public class Vuelos extends AppCompatActivity {
 
     }
 
+    // En caso de que el usuario seleccione la opción "Sí" en el diálogo para realizar una reserva
+    // este es el método que ejecuta el diálogo.
     public void update(int i) {
+        // Primero recogo la información del item de la vista y genero un vuelo
         InformacionVuelo vuelo;
         vuelo = vuelos.get(i);
         Map<String, Object> vue = new HashMap<>();
@@ -139,6 +149,8 @@ public class Vuelos extends AppCompatActivity {
         } else {
             vue.put(Calendar.getInstance().getTime().toString(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), passengers, vuelo.getDepart()));
         }
+        // Una vez hecho esto, añado en la colección de reservas en el documento de mi usuario
+        // un nuevo vuelo.
         db.collection("reservas").document(user.getEmail())
                 .set(vue, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

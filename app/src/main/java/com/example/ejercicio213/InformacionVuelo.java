@@ -3,10 +3,12 @@ package com.example.ejercicio213;
 import java.io.Serializable;
 
 public class InformacionVuelo implements Serializable {
+    // Este objeto se utilizará a lo largo del programa para generar vuelos.
     String tipo, numparadas, from, to, depart, arrive;
     long passengers;
     String precio, idreserva;
 
+    // Este constructor se usa cuando el vuelo es de ida y vuelta.
     public InformacionVuelo (String ti, String f, String t, String d, String a, String num, long p) {
         this.tipo = ti;
         this.from = f;
@@ -16,6 +18,8 @@ public class InformacionVuelo implements Serializable {
         this.numparadas = num;
         this.passengers = p;
     }
+
+    // Este constructor se usa cuando el vuelo es únicamente de ida.
     public InformacionVuelo (String ti, String f, String t, String d, String num, long p) {
         this.tipo = ti;
         this.from = f;
@@ -95,6 +99,7 @@ public class InformacionVuelo implements Serializable {
         this.idreserva = idreserva;
     }
 
+    // Genero un toString para poder enseñar los vuelos en caso de ser necesario mostrarlos en un Log
     @Override
     public String toString() {
         return  "Tipo = " + tipo + '\n' +

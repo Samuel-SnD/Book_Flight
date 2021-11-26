@@ -32,17 +32,20 @@ public class LogIn_Activity extends AppCompatActivity {
         EditText email = findViewById(R.id.etmail);
         EditText password = findViewById(R.id.password);
 
+        // Hago un onClickListener en el botón de LogIn
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Genero un attempt a iniciar sesión con las credenciales aportadas por el usuario
                 mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(LogIn_Activity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                // Si se realiza correctamente lanzo la MainActivity
                                 if (task.isSuccessful()) {
-
                                     Intent it = new Intent (getApplicationContext(), MainActivity.class);
                                     startActivity(it);
+                                // En caso de no encontrar los datos avisa al usuario
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                                 }
@@ -51,9 +54,11 @@ public class LogIn_Activity extends AppCompatActivity {
             }
         });
 
+        // Hago un onClickListener en el botón de registro
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Creo un usuario en la base de datos con la información proporcionada por el usuario
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(LogIn_Activity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -68,27 +73,5 @@ public class LogIn_Activity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload();
-        }
-    }
-
-
-    private void sendEmailVerification() {
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                    }
-                });
-    }
-
-    private void reload() { }
 
 }

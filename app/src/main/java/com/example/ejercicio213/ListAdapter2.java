@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListAdapter2 extends BaseAdapter {
+
+    //Cre un adaptador para la actividad de Historial
+
     Context context;
     private ArrayList <InformacionVuelo> vuelos;
 
@@ -36,6 +39,7 @@ public class ListAdapter2 extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         final View result;
+        // Instancio todos los campos
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -51,6 +55,9 @@ public class ListAdapter2 extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        // En caso de que el vuelo sea de Ida y vuelta, añado la vuelta a la derecha de la ida
+        // en la misma fila
 
         if (vuelos.get(position).tipo.equalsIgnoreCase("Ida y Vuelta")) {
             viewHolder.txtFecha.setText(vuelos.get(position).getDepart().concat(" / ").concat(vuelos.get(position).getArrive()));

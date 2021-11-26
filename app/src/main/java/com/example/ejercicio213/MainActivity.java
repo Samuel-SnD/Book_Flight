@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         EditText pas = findViewById(R.id.et5);
         ImageButton iv1 = findViewById(R.id.ib1);
 
+        // Genero dos onClickListener, cada uno para los botones de eliminar o añadir pasageros
+        // Los botones no funcionan a no ser que el valor esté comprendido entre 0 y 19
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Genero un onClickListener para el botón de buscar vuelos
         Button sf = findViewById(R.id.btn2);
         sf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,9 +126,16 @@ public class MainActivity extends AppCompatActivity {
                     InformacionVuelo vuelo = new InformacionVuelo(selectedText, from, to, depart, selectedText2 ,passengers);
                     it.putExtra("Vuelo", vuelo);
                     Map <String, Object> vue = new HashMap <> ();
+                    // Al añadirlo con Calendar.getInstance.getTime me aseguro de que nunca habrá
+                    // dos búsquedas en el historial con el mismo id, ya que recoge el segundo
                     vue.put(Calendar.getInstance().getTime().toString(), Arrays.asList(vuelo.getTipo(), vuelo.getFrom(), vuelo.getTo(), vuelo.getNumparadas(), vuelo.getPassengers(), vuelo.getDepart()));
+                    // Se hace un volcado de ese vuelo en la base de datos, en la colección "historial"
+                    // en el documento asociado con el correo electrónico del usuario que realiza
+                    // la búsqueda.
                     db.collection("historial").document(user.getEmail())
                             .set(vue, SetOptions.merge())
+                            // Dependiendo de si se ha creado o no hago un Log para poder verlo en
+                            // el run.
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -166,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Hago un onClickListener para el botón de Historial que realiza un intent a la
+        // actividad correspondiente.
         Button hs = findViewById (R.id.btn1);
         hs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Hago un onClickListener para el botón de Ver Reservas que realiza un intent
+        // a la actividad correspondiente.
         Button rs = findViewById(R.id.btn3);
         rs.setOnClickListener(new View.OnClickListener() {
             @Override
